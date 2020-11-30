@@ -24,3 +24,32 @@ hs_err_pid*
 
 # IDE Generated folder
 *.idea/
+
+#WebStorm
+
+# Outputs
+bazel-*
+test-project-host-*
+dist/
+dist-schema/
+
+# IDEs
+jsconfig.json
+
+# Typings file.
+typings/
+
+# Misc
+coverage/
+node_modules/
+tmp/
+npm-debug.log*
+yarn-error.log*
+.ng_pkg_build/
+.ng-dev.log
+.ng-dev.user*
+.husky/_
+
+# Mac OSX Finder files.
+**/.DS_Store
+.DS_Store
