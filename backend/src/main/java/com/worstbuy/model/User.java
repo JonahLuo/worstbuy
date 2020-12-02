@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String password;
     private String address;
-    private List<Transaction> transactoins;
+    private List<Transaction> transactions;
     private List<Posters> posters;
 
 }
