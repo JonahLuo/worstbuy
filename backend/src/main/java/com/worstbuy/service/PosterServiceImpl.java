@@ -3,9 +3,11 @@ package com.worstbuy.service;
 import com.worstbuy.dao.PosterDAO;
 import com.worstbuy.model.Poster;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PosterServiceImpl implements PosterService{
 
     private PosterDAO posterDAO;

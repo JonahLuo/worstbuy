@@ -3,9 +3,11 @@ package com.worstbuy.service;
 import com.worstbuy.dao.TransactionDAO;
 import com.worstbuy.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TransactionServiceImpl implements TransactionService{
 
     private TransactionDAO transactionDAO;

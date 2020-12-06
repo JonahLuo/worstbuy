@@ -3,9 +3,11 @@ package com.worstbuy.service;
 import com.worstbuy.dao.UserDAO;
 import com.worstbuy.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService{
 
     private UserDAO userDAO;
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> list() {
-        return null;
+        return userDAO.list();
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.worstbuy.dao;
 
 import com.worstbuy.model.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class TransactionDAOImpl implements TransactionDAO{
     @Override
     public Transaction get(long id) {

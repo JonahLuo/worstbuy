@@ -16,7 +16,7 @@ import static org.hibernate.cfg.Environment.*;
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScans(value= {
-        @ComponentScan("com.worstbuy.model"),
+        @ComponentScan("com.worstbuy.service"),
         @ComponentScan("com.worstbuy.dao")
 })
 public class AppConfig {
