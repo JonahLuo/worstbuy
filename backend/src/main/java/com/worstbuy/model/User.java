@@ -17,9 +17,9 @@ public class User {
     private String address;
 
     @OneToMany
-    @JoinColumn(name="TRANSACTIONS")
+    @JoinColumn(name="TRANSACTION_ID")
     private List<Transaction> transactions;
 
-    private List<Posters> posters;
+    private List<Poster> posters;
 
 }

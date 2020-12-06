@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity(name = "Posters")
-public class Posters {
+public class Poster {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
