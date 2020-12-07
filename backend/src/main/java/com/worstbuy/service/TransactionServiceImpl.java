@@ -18,13 +18,13 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public Transaction get(long id) {
+    public Transaction get(Long id) {
         return null;
     }
 
     @Override
-    public long save(Transaction transaction) {
-        return 0;
+    public Long save(Transaction transaction) {
+        return null;
     }
 
     @Override

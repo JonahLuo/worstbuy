@@ -10,14 +10,14 @@ public interface TransactionDAO {
      * @param id the id of the transaction to be found
      * @return the transaction
      */
-    Transaction get(long id);
+    Transaction get(Long id);
 
     /**
      * save the given transaction
      * @param transaction the transaction to be saved
      * @return the id the transaction saved
      */
-    long save(Transaction transaction);
+    Long save(Transaction transaction);
 
     /**
      * Get all of the transactions

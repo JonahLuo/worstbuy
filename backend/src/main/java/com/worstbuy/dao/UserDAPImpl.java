@@ -18,8 +18,8 @@ public class UserDAPImpl implements UserDAO{
     }
 
     @Override
-    public long save(User user) {
-        return 0;
+    public Long save(User user) {
+        return null;
     }
 
     @Override
@@ -28,18 +28,18 @@ public class UserDAPImpl implements UserDAO{
     }
 
     @Override
-    public User get(long id) {
+    public User get(Long id) {
         return null;
     }
 
     @Override
     public List<User> list() {
-        List<User> list = sessionFactory.getCurrentSession().createQuery("from User").list();
+        List<User> list = sessionFactory.getCurrentSession().createQuery("from user").list();
         return list;
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
 
     }
 }

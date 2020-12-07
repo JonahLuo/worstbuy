@@ -5,6 +5,7 @@ import com.worstbuy.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,8 +19,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public long save(User user) {
-        return 0;
+    public Long save(User user) {
+        return null;
     }
 
     @Override
@@ -28,17 +29,18 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User get(long id) {
+    public User get(Long id) {
         return null;
     }
 
     @Override
+    @Transactional
     public List<User> list() {
         return userDAO.list();
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
 
     }
 }

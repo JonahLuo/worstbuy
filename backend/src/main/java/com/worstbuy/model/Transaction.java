@@ -6,17 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
-@Entity(name = "TRANSACTION")
+@Entity(name = "transaction")
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private Date date;
-    private long posterId;
+    private Long posterId;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -32,7 +32,7 @@ public class Transaction {
         this.date = date;
     }
 
-    public long getPosterId() {
+    public Long getPosterId() {
         return posterId;
     }
 

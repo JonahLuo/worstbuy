@@ -10,7 +10,7 @@ public interface UserService {
      * @param user the user to be saved
      * @return the id of the saved User
      */
-    long save(User user);
+    Long save(User user);
 
     /**
      * update the given User
@@ -23,7 +23,7 @@ public interface UserService {
      * @param id    the id of the user
      * @return      the target user
      */
-    User get(long id);
+    User get(Long id);
 
     /**
      * get all of the user
@@ -35,5 +35,5 @@ public interface UserService {
      * delete the user
      * @param id    the id of the user to be deleted
      */
-    void delete(long id);
+    void delete(Long id);
 }

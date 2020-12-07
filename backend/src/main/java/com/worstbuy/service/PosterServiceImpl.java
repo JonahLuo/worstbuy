@@ -18,13 +18,13 @@ public class PosterServiceImpl implements PosterService{
     }
 
     @Override
-    public Poster get(long id) {
+    public Poster get(Long id) {
         return null;
     }
 
     @Override
-    public long save(Poster poster) {
-        return 0;
+    public Long save(Poster poster) {
+        return null;
     }
 
     @Override

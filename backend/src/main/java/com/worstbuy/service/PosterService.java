@@ -10,14 +10,14 @@ public interface PosterService {
      * @param id the id of the poster to be found
      * @return the Poster looking for
      */
-    Poster get(long id);
+    Poster get(Long id);
 
     /**
      * save the given poster
      * @param poster the poster to be saved
      * @return the id of the poster saved
      */
-    long save(Poster poster);
+    Long save(Poster poster);
 
     /**
      * get all of the poster

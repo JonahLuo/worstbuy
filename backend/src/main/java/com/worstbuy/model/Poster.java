@@ -12,7 +12,7 @@ public class Poster {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private double price;
     private String description;
 

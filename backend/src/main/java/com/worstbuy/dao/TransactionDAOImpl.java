@@ -8,13 +8,13 @@ import java.util.List;
 @Repository
 public class TransactionDAOImpl implements TransactionDAO{
     @Override
-    public Transaction get(long id) {
+    public Transaction get(Long id) {
         return null;
     }
 
     @Override
-    public long save(Transaction transaction) {
-        return 0;
+    public Long save(Transaction transaction) {
+        return null;
     }
 
     @Override
