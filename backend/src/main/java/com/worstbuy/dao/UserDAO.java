@@ -11,20 +11,21 @@ public interface UserDAO {
      * @param user the user to be saved
      * @return the id of the saved User
      */
-    Long save(User user);
+    long save(User user);
 
     /**
      * update the given User
+     * @param id
      * @param user the user to be upated
      */
-    void update(User user);
+    void update(long id, User user);
 
     /**
      * get the user
      * @param id    the id of the user
      * @return      the target user
      */
-    User get(Long id);
+    User get(long id);
 
     /**
      * get all of the user
@@ -36,6 +37,6 @@ public interface UserDAO {
      * delete the user
      * @param id    the id of the user to be deleted
      */
-    void delete(Long id);
+    void delete(long id);
 
 }

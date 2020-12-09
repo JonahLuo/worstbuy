@@ -5,6 +5,7 @@ import com.worstbuy.model.Poster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,27 +19,32 @@ public class PosterServiceImpl implements PosterService{
     }
 
     @Override
-    public Poster get(Long id) {
-        return null;
+    @Transactional
+    public Poster get(long id) {
+        return posterDAO.get(id);
     }
 
     @Override
-    public Long save(Poster poster) {
-        return null;
+    @Transactional
+    public long save(Poster poster) {
+        return posterDAO.save(poster);
     }
 
     @Override
+    @Transactional
     public List<Poster> list() {
-        return null;
+        return posterDAO.list();
     }
 
     @Override
-    public void update(Poster poster) {
-
+    @Transactional
+    public void update(long id, Poster poster) {
+        posterDAO.update(id, poster);
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
-
+        posterDAO.delete(id);
     }
 }

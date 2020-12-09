@@ -10,14 +10,14 @@ public interface PosterService {
      * @param id the id of the poster to be found
      * @return the Poster looking for
      */
-    Poster get(Long id);
+    Poster get(long id);
 
     /**
      * save the given poster
      * @param poster the poster to be saved
      * @return the id of the poster saved
      */
-    Long save(Poster poster);
+    long save(Poster poster);
 
     /**
      * get all of the poster
@@ -27,9 +27,10 @@ public interface PosterService {
 
     /**
      * update the poster
+     * @param id
      * @param poster the poster to be updated
      */
-    void update(Poster poster);
+    void update(long id, Poster poster);
 
     /**
      * delete the poster

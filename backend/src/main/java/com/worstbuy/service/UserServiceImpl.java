@@ -19,18 +19,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Long save(User user) {
-        return null;
+    @Transactional
+    public long save(User user) {
+        return userDAO.save(user);
     }
 
     @Override
-    public void update(User user) {
-
+    @Transactional
+    public void update(long id, User user) {
+        userDAO.update(id, user);
     }
 
     @Override
-    public User get(Long id) {
-        return null;
+    @Transactional
+    public User get(long id) {
+        return userDAO.get(id);
     }
 
     @Override
@@ -40,7 +43,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void delete(Long id) {
-
+    @Transactional
+    public void delete(long id) {
+        userDAO.delete(id);
     }
 }

@@ -5,6 +5,7 @@ import com.worstbuy.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,27 +19,32 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public Transaction get(Long id) {
-        return null;
+    @Transactional
+    public Transaction get(long id) {
+        return transactionDAO.get(id);
     }
 
     @Override
-    public Long save(Transaction transaction) {
-        return null;
+    @Transactional
+    public long save(Transaction transaction) {
+        return transactionDAO.save(transaction);
     }
 
     @Override
+    @Transactional
     public List<Transaction> list() {
-        return null;
+        return transactionDAO.list();
     }
 
     @Override
-    public void update(Transaction transaction) {
-
+    @Transactional
+    public void update(long id, Transaction transaction) {
+        transactionDAO.update(id, transaction);
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
-
+        transactionDAO.delete(id);
     }
 }
