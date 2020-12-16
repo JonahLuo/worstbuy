@@ -43,6 +43,12 @@ public class UserDAPImpl implements UserDAO{
     }
 
     @Override
+    public User getByName(String username) {
+        String hql = "from user u where u.userName = :userName";
+        return (User)sessionFactory.getCurrentSession().createQuery(hql).setParameter("userName", username);
+    }
+
+    @Override
     public List<User> list() {
         List<User> list = sessionFactory.getCurrentSession().createQuery("from user").list();
         return list;
@@ -53,5 +59,6 @@ public class UserDAPImpl implements UserDAO{
         Session session = sessionFactory.getCurrentSession();
         User user = session.byId(User.class).load(id);
         session.delete(user);
+
     }
 }

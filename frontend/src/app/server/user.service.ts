@@ -23,7 +23,7 @@ export class UserService {
    * constructor
    */
   constructor(private http: HttpClient) {
-    this.userResource = 'users';
+    this.userResource = 'user';
     this.userResourceURL = `${environment.serverBaseURL}/${this.userResource}`;
   }
 

@@ -1,71 +1,102 @@
 package com.worstbuy.javachinna;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 
 @Component
-public class JwtTokenUtil implements Serializable {
-    private static final long serialVersionUID = -2550185165626007488L;
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-    @Value("${jwt.secret}")
-    private String secret;
+public class JwtTokenUtil{
+    /**
+     * token加密时使用的密钥
+     * 一旦得到该密钥也就可以伪造token了
+     */
+    public static String sercetKey = "InMySchoolOnline";
+    /**
+     * 代表token的有效时间
+     */
+    public final static long keeptime = 1800000;
 
-    // retrieve username from jwt token
-    public String getUsernameFromToken(String token) {
-        return getClaimFromToken(token, Claims::getSubject);
+    /**
+     * JWT由3个部分组成,分别是 头部Header,载荷Payload一般是用户信息和声明,签证Signature一般是密钥和签名
+     * 当头部用base64进行编码后一般都会呈现eyJ...形式,而载荷为非强制使用,签证则包含了哈希算法加密后的数据,包括转码后的header,payload和sercetKey
+     * 而payload又包含几个部分,issuer签发者,subject面向用户,iat签发时间,exp过期时间,aud接收方。
+     * @Title: generToken
+     * @Description: TODO
+     * @param: @param id 用户id
+     * @param: @param issuer 签发者
+     * @param: @param subject 一般用户名
+     * @param: @return
+     * @return: String
+     * @throws
+     */
+    public static String generToken(String id, String issuer, String subject) {
+        long ttlMillis = keeptime;
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+        //使用Hash256算法进行加密
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+        //获取系统时间以便设置token有效时间
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(sercetKey);
+        //将密钥转码为base64形式,再转为字节码
+        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+        //对其使用Hash256进行加密
+        JwtBuilder builder = Jwts.builder().setId(id).setIssuedAt(now);
+        //JWT生成类,此时设置iat,以及根据传入的id设置token
+        if (subject != null) {
+            builder.setSubject(subject);
+        }
+        if (issuer != null) {
+            builder.setIssuer(issuer);
+        }
+        //由于Payload是非必须加入的,所以这时候要加入检测
+        builder.signWith(signatureAlgorithm, signingKey);
+        //进行签名,生成Signature
+        if (ttlMillis >= 0) {
+            long expMillis = nowMillis + ttlMillis;
+            Date exp = new Date(expMillis);
+            builder.setExpiration(exp);
+        }
+        //返回最终的token结果
+        return builder.compact();
+    }
+    /**
+     * 该函数用于更新token
+     * @Title: updateToken
+     * @Description: TODO
+     * @param: @param token
+     * @param: @return
+     * @return: String
+     * @throws
+     */
+    public static String updateToken(String token) {
+        //Claims就是包含了我们的Payload信息类
+        Claims claims = verifyToken(token);
+        String id = claims.getId();
+        String subject = claims.getSubject();
+        String issuer = claims.getIssuer();
+        //生成新的token,根据现在的时间
+        return generToken(id, issuer, subject);
+    }
+    /**
+     * 将token解密出来,将payload信息包装成Claims类返回
+     * @Title: verifyToken
+     * @Description: TODO
+     * @param: @param token
+     * @param: @return
+     * @return: Claims
+     * @throws
+     */
+    private static Claims verifyToken(String token) {
+        Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(sercetKey))
+                .parseClaimsJws(token).getBody();
+        return claims;
     }
 
-    // retrieve expiration date from jwt token
-    public Date getExpirationDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getExpiration);
-    }
-
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = getAllClaimsFromToken(token);
-        return claimsResolver.apply(claims);
-    }
-
-    // for retrieveing any information from token we will need the secret key
-    private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-    }
-
-    // check if the token has expired
-    private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
-    }
-
-    // generate token for user
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername());
-    }
-
-    // while creating the token -
-    // 1. Define claims of the token, like Issuer, Expiration, Subject, and the ID
-    // 2. Sign the JWT using the HS512 algorithm and secret key.
-    // 3. According to JWS Compact
-    // Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1)
-    // compaction of the JWT to a URL-safe string
-    private String doGenerateToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000)).signWith(SignatureAlgorithm.HS512, secret).compact();
-    }
-
-    // validate token
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }
 }

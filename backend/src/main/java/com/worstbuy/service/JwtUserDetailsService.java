@@ -18,8 +18,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // TODO: to update the User object creation
-        User user = userDAO.get(00);
+        User user = userDAO.getByName(username);
 //        UserEntity user = repo.findByUsername(username);
         if(user!=null){
             return new org.springframework.security.core.userdetails.User(

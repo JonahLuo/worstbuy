@@ -28,6 +28,13 @@ public interface UserDAO {
     User get(long id);
 
     /**
+     * get the user by username
+     * @param username  the username of the user
+     * @return          the target user or null if it dose not exist
+     */
+    User getByName(String username);
+
+    /**
      * get all of the user
      * @return the list of the user
      */
@@ -38,5 +45,6 @@ public interface UserDAO {
      * @param id    the id of the user to be deleted
      */
     void delete(long id);
+
 
 }
