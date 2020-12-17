@@ -1,1 +1,21 @@
+<nb-card>
+  <nb-card-body>
+    <nb-form-field>
+      <input nbInput #serchcontent shape="semi-round" size="large" fullWidth=true />
+      <button nbSuffix nbButton (click)="search(serchcontent.value)" shape="semi-round">
+        <nb-icon [options]="{ animation: { type: 'shake' } }" icon="search-outline"></nb-icon>
+      </button>
+    </nb-form-field>
+
+    <div style="margin-top: 1em">
+      <nb-card *ngFor="let category of categoryList; index as i"
+               routerLink="/pages/categoryDetail/{{category}}" >
+        <nb-card-body>
+          {{category}}
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+  </nb-card-body>
+</nb-card>
 

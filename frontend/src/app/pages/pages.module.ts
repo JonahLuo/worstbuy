@@ -4,7 +4,20 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {PagesRoutingModule} from './pages-routing.module';
 import {SafePipe} from './pipe/SafePipe';
-import {NbActionsModule, NbContextMenuModule, NbLayoutModule, NbUserModule} from '@nebular/theme';
+import {
+  NbActionsModule, NbButtonModule,
+  NbCardModule,
+  NbContextMenuModule,
+  NbFormFieldModule, NbIconModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbUserModule
+} from '@nebular/theme';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { CreatePosterComponent } from './create-poster/create-poster.component';
+import { ProfileComponent } from './profile/profile.component';
+import { OtherprofileComponent } from './otherprofile/otherprofile.component';
 
 
 
@@ -12,7 +25,12 @@ import {NbActionsModule, NbContextMenuModule, NbLayoutModule, NbUserModule} from
   declarations: [
     HomeComponent,
     NavbarComponent,
-    SafePipe
+    SafePipe,
+    CategoryDetailComponent,
+    ItemDetailComponent,
+    CreatePosterComponent,
+    ProfileComponent,
+    OtherprofileComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +39,11 @@ import {NbActionsModule, NbContextMenuModule, NbLayoutModule, NbUserModule} from
     NbUserModule,
     NbLayoutModule,
     NbActionsModule,
+    NbCardModule,
+    NbInputModule,
+    NbFormFieldModule,
+    NbButtonModule,
+    NbIconModule,
   ],
   exports: [
     SafePipe

@@ -1,0 +1,22 @@
+<nb-card *ngIf="itemlist != null">
+  <nb-card *ngFor="let item of itemlist" class="div-container">
+    <nb-card-header routerLink="/pages/profile/{{item.seller.id}}" >
+      <nb-user [name]="item.seller.username" [picture]="item.seller.profileImage"></nb-user>
+      {{item.title}}
+    </nb-card-header>
+    <div class = "video-info">
+      <div class="video-pic"
+           routerLink="/pages/details/{{item?.id}}">
+        <!-- <iframe class="div-video" [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'" width="100%" height="100%"></iframe> -->
+
+      </div>
+      <div class="video-like">
+        <div class="favorite">
+          <nb-icon icon="edit"
+                   class="favorite-icon"></nb-icon>
+        </div>
+      </div>
+  </nb-card>
+
+</nb-card>
+

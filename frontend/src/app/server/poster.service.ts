@@ -34,7 +34,7 @@ export class PosterService {
    */
   getPosterById(id: string): Observable<Poster> {
     const url = `${this.userResourceURL}/${id}`;
-    return this.http.get<User>(url).pipe(
+    return this.http.get<Poster>(url).pipe(
       catchError(this.handleError<Poster>(`getUser id=${id}`))
     );
   }
