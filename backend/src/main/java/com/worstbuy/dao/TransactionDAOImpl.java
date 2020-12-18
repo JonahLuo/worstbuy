@@ -30,7 +30,7 @@ public class TransactionDAOImpl implements TransactionDAO{
 
     @Override
     public List<Transaction> list() {
-        List<Transaction> list = sessionFactory.getCurrentSession().createQuery("from transaction").list();
+        List<Transaction> list = sessionFactory.getCurrentSession().createQuery("from Transaction").list();
         return list;
     }
 
@@ -39,7 +39,7 @@ public class TransactionDAOImpl implements TransactionDAO{
         Session session = sessionFactory.getCurrentSession();
         Transaction oldTransaction = session.byId(Transaction.class).load(id);
         oldTransaction.setDate(transaction.getDate());
-        oldTransaction.setPosterId(transaction.getPosterId());
+//        oldTransaction.setPosterId(transaction.getPosterId());
         session.flush();
     }
 

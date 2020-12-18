@@ -32,7 +32,7 @@ public class PosterDAOImpl implements PosterDAO{
 
     @Override
     public List<Poster> list() {
-        List<Poster> list = sessionFactory.getCurrentSession().createQuery("from poster").list();
+        List<Poster> list = sessionFactory.getCurrentSession().createQuery("from Poster").list();
         return list;
     }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Categories} from '../../models/Categories';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  categoryList: string[] = [
-    'Electronics', 'Computers', 'Toys',
-    'Game Console', 'Video Game', 'Sports',
-    'Smart Home', 'Out Doors'
-  ];
+  categoryList = Categories;
 
   constructor() { }
 

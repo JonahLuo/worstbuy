@@ -1,4 +1,4 @@
-package com.worstbuy.javachinna;
+package com.worstbuy.util;
 
 import java.util.HashMap;
 import java.util.Map;

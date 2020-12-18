@@ -17,7 +17,9 @@ import static org.hibernate.cfg.Environment.*;
 @EnableTransactionManagement
 @ComponentScans(value= {
         @ComponentScan("com.worstbuy.service"),
-        @ComponentScan("com.worstbuy.dao")
+        @ComponentScan("com.worstbuy.dao"),
+        @ComponentScan("com.worstbuy.model"),
+        @ComponentScan("com.worstbuy.filter")
 })
 public class AppConfig {
 
@@ -48,7 +50,6 @@ public class AppConfig {
 
         factoryBean.setHibernateProperties(properties);
         factoryBean.setPackagesToScan("com.worstbuy.model");
-
         return factoryBean;
     }
 

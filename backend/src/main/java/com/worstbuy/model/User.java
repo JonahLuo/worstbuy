@@ -1,11 +1,12 @@
 package com.worstbuy.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.stereotype.Component;
 
-@Entity(name = "user")
+import javax.persistence.*;
+import java.util.List;
+
+@Component
+@Entity(name = "User")
 public class User {
 
     @Id
@@ -17,12 +18,59 @@ public class User {
     private String email;
     private String password;
     private String address;
+    private double rate;
+    private String role;
 
-//    @OneToMany
-//    @JoinColumn(name="TRANSACTION_ID")
-//    private List<Transaction> transactions;
-//
+    @OneToOne
+    private Image image;
+
+
+    @ManyToMany (mappedBy = "user", fetch = FetchType.LAZY )
+    private List<Transaction> transactions;
+
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 //    private List<Poster> posters;
+
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+//    public List<Poster> getPosters() {
+//        return posters;
+//    }
+//
+//    public void setPosters(List<Poster> posters) {
+//        this.posters = posters;
+//    }
 
 
     public Long getId() {

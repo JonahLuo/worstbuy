@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 import {Observable, of} from 'rxjs';
 import {User} from '../models/User';
 import {catchError} from 'rxjs/operators';
+import {Poster} from '../models/Poster';
 
 @Injectable({
   providedIn: 'root'
@@ -87,44 +88,23 @@ export class UserService {
   //   );
   // }
   //
-  // /**
-  //  * POST: user set the video to favorite
-  //  */
-  // setFavoriteVideo(video: Video): Observable<any>{
-  //   const url = `${this.userResourceURL}/setFavorite`;
-  //   return this.http.post<any>(url, video, this.cors).pipe(
-  //     catchError(this.handleError<any>(`favorite video id = ${video.id}`))
-  //   );
-  // }
-  //
-  // /**
-  //  * POST: user undo the favorite operation
-  //  */
-  // unFavoriteVideo(video: Video): Observable<any>{
-  //   const url = `${this.userResourceURL}/unFavorite`;
-  //   return this.http.post<any>(url, video, this.cors).pipe(
-  //     catchError(this.handleError<any>(`unfavorite video id = ${video.id}`))
-  //   );
-  // }
-
   /**
-   * POST: user subscribe other user
+   * POST: user set the Poster to favorite
    */
-  subscribeUser(user: User): Observable<User>{
-    const url = `${this.userResourceURL}/subscribe`;
-    return this.http.post<User>(url, user, this.cors).pipe(
-      catchError(this.handleError<User>(`subscribe user id = ${user.id}`))
+  setFavoritePoster(poster: Poster): Observable<any>{
+    const url = `${this.userResourceURL}/setFavorite`;
+    return this.http.post<any>(url, poster, this.cors).pipe(
+      catchError(this.handleError<any>(`favorite video id = ${poster.id}`))
     );
   }
 
   /**
-   * POST: user unsubscribe other user
+   * POST: user undo the favorite operation
    */
-  unSubscribeUser(user: User): Observable<User>{
-    const url = `${this.userResourceURL}/unSubscribe`;
-    console.log(`userid ${user.id}`);
-    return this.http.post<User>(url, user, this.cors).pipe(
-      catchError(this.handleError<User>(`unSubscribe user id = ${user.id}`))
+  unFavoritePoster(poster: Poster): Observable<any>{
+    const url = `${this.userResourceURL}/unFavorite`;
+    return this.http.post<any>(url, poster, this.cors).pipe(
+      catchError(this.handleError<any>(`unfavorite video id = ${poster.id}`))
     );
   }
 

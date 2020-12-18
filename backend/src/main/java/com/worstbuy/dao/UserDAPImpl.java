@@ -44,7 +44,7 @@ public class UserDAPImpl implements UserDAO{
 
     @Override
     public User getByName(String username) {
-        String hql = "from user u where u.userName = :userName";
+        String hql = "from User u where u.userName = :userName";
         return (User)sessionFactory.getCurrentSession().createQuery(hql).setParameter("userName", username);
     }
 

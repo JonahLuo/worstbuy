@@ -1,12 +1,12 @@
 package com.worstbuy.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "transaction")
+@Component
+@Entity(name = "Transaction")
 public class Transaction {
 
     @Id
@@ -14,13 +14,66 @@ public class Transaction {
     private Long id;
 
     private Date date;
-    private Long posterId;
+
+//    @OneToOne
+//    @JoinColumn(name = "poster_id")
+//    private Poster poster;
+
+    @ManyToOne
+    private User buyer;
+
+    @ManyToOne
+    private User seller;
+
+    private String status;
+
+//    public Poster getPoster() {
+//        return poster;
+//    }
+//
+//    public void setPoster(Poster poster) {
+//        this.poster = poster;
+//    }
+
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    private double rate;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -32,11 +85,15 @@ public class Transaction {
         this.date = date;
     }
 
-    public Long getPosterId() {
-        return posterId;
-    }
-
-    public void setPosterId(long posterId) {
-        this.posterId = posterId;
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", date=" + date +
+                ", buyer=" + buyer +
+                ", seller=" + seller +
+                ", status='" + status + '\'' +
+                ", rate=" + rate +
+                '}';
     }
 }

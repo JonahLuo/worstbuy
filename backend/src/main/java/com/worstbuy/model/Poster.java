@@ -1,13 +1,11 @@
 package com.worstbuy.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "poster")
+@Entity
+@Table(name = "Poster")
 public class Poster {
 
     @Id
@@ -16,16 +14,19 @@ public class Poster {
 
     private double price;
     private String description;
-
-    //TODO: make condition, category, tag, and brand as enum if possible. Model class and Database could be created if necessary
     private String condition;
-    
     private String category;
     private String tag;
     private String brand;
     private Date modifyDate;
     private Date createDate;
     private boolean isClose;
+
+    @OneToOne
+    private Image image;
+//    @(fetch = FetchType.LAZY)
+//    @JoinColumn(name="user_id")
+//    private User seller;
 
     public Long getId() {
         return id;
@@ -34,6 +35,21 @@ public class Poster {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+    //    public User getSeller() {
+//        return seller;
+//    }
+//
+//    public void setSeller(User seller) {
+//        this.seller = seller;
+//    }
 
     public double getPrice() {
         return price;
@@ -105,5 +121,21 @@ public class Poster {
 
     public void setClose(boolean close) {
         isClose = close;
+    }
+
+    @Override
+    public String toString() {
+        return "Poster{" +
+                "id=" + id +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", condition='" + condition + '\'' +
+                ", category='" + category + '\'' +
+                ", tag='" + tag + '\'' +
+                ", brand='" + brand + '\'' +
+                ", modifyDate=" + modifyDate +
+                ", createDate=" + createDate +
+                ", isClose=" + isClose +
+                '}';
     }
 }
