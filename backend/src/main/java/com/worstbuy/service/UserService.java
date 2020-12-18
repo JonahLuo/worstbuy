@@ -44,4 +44,11 @@ public interface UserService {
      * @param id    the id of the user to be deleted
      */
     void delete(long id);
+
+    /**
+     * Get User by email
+     * @param email     the email of the target user
+     * @return          target user
+     */
+    User findUserByEmail(String email);
 }

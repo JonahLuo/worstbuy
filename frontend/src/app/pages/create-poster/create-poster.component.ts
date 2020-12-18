@@ -57,32 +57,35 @@ export class CreatePosterComponent implements OnInit {
     });
   }
 
-  step1next() {
-    if (this.getPosterImage(this.firstFormGroup.value.url)) {
-      this.poster.seller = this.profile;
-      this.poster.comments = this.comments;
-      this.uploadFileToActivity();
-      // this.nbStepperComponent.next();
-    }
-  }
+  //TODO
+  // step1next() {
+  //   if (this.getPosterImage(this.firstFormGroup.value.url)) {
+  //     this.poster.seller = this.profile;
+  //     this.poster.comments = this.comments;
+  //     this.uploadFileToActivity();
+  //     // this.nbStepperComponent.next();
+  //   }
+  // }
 
-  step2next() {
-    this.poster.title = this.secondFormGroup.value.title;
-    this.poster.tag = this.secondFormGroup.value.tag;
-    this.poster.description = (this.secondFormGroup.value.description === undefined ? 'none' : this.secondFormGroup.value.description);
-    this.poster.comments = new Array();
-    this.posterService.uploadPoster(this.poster).subscribe();
-  }
+  //TODO
+  // step2next() {
+  //   this.poster.title = this.secondFormGroup.value.title;
+  //   this.poster.tag = this.secondFormGroup.value.tag;
+  //   this.poster.description = (this.secondFormGroup.value.description === undefined ? 'none' : this.secondFormGroup.value.description);
+  //   this.poster.comments = new Array();
+  //   this.posterService.uploadPoster(this.poster).subscribe();
+  // }
 
-  getPosterImage(url: string): boolean {
-    if (url !== undefined ) {
-      const temp = url.replace('https://www.youtube.com/watch?v=', '');
-      if (temp === null) { return false; }
-      this.poster.url = temp;
-      return true;
-    }
-    return false;
-  }
+  //TODO
+  // getPosterImage(url: string): boolean {
+  //   if (url !== undefined ) {
+  //     const temp = url.replace('https://www.youtube.com/watch?v=', '');
+  //     if (temp === null) { return false; }
+  //     this.poster.url = temp;
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   // tslint:disable-next-line:typedef
   upload(files: FileList) {

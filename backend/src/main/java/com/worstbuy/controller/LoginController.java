@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin
 public class LoginController {
 
     @Autowired
@@ -25,18 +24,19 @@ public class LoginController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/auth/login")
     public ResponseEntity<?> generateAuthToken(@RequestBody JwtRequest jwtRequest) throws Exception{
 
         try{
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword())
+                    new UsernamePasswordAuthenticationToken(jwtRequest.getEmail(), jwtRequest.getPassword())
             );
         }catch (BadCredentialsException e){
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtRequest.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtRequest.getEmail());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new com.worstbuy.model.JwtResponse(jwt));
     }

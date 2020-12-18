@@ -47,4 +47,10 @@ public interface UserDAO {
     void delete(long id);
 
 
+    /**
+     * Get the user by email
+     * @param email     the email of the target User
+     * @return          the target user
+     */
+    User findUserByEmail(String email);
 }

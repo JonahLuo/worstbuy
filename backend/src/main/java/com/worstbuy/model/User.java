@@ -1,5 +1,6 @@
 package com.worstbuy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -19,27 +20,27 @@ public class User {
     private String password;
     private String address;
     private double rate;
-    private String role;
-
-    @OneToOne
-    private Image image;
 
 
-    @ManyToMany (mappedBy = "user", fetch = FetchType.LAZY )
+    //    private String[] role;
+    private boolean hasImage = false;
+
+
+    @OneToMany (mappedBy = "seller")
     private List<Transaction> transactions;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Poster> posters;
+    @OneToMany(mappedBy = "seller")
+    @JsonIgnore
+    private List<Poster> posters;
 
 
-    public Image getImage() {
-        return image;
+    public boolean isHasImage() {
+        return hasImage;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setHasImage(boolean hasImage) {
+        this.hasImage = hasImage;
     }
-
     public double getRate() {
         return rate;
     }
@@ -48,13 +49,13 @@ public class User {
         this.rate = rate;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+//    public String[] getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String[] role) {
+//        this.role = role;
+//    }
 
     public List<Transaction> getTransactions() {
         return transactions;
@@ -64,13 +65,13 @@ public class User {
         this.transactions = transactions;
     }
 
-//    public List<Poster> getPosters() {
-//        return posters;
-//    }
-//
-//    public void setPosters(List<Poster> posters) {
-//        this.posters = posters;
-//    }
+    public List<Poster> getPosters() {
+        return posters;
+    }
+
+    public void setPosters(List<Poster> posters) {
+        this.posters = posters;
+    }
 
 
     public Long getId() {

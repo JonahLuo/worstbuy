@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from '../../models/User';
+import {Poster} from '../../models/Poster';
+import {ActivatedRoute} from '@angular/router';
+import {UserService} from '../../server/user.service';
+import {PosterService} from '../../server/poster.service';
 
 @Component({
   selector: 'app-otherprofile',
@@ -8,15 +13,15 @@ import { Component, OnInit } from '@angular/core';
 export class OtherprofileComponent implements OnInit {
   profile: User;
   followClicked = true;
-  videos: Video[] = [];
+  posters: Poster[] = [];
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
-              public videoService: VideoService) { }
+              public posterService: PosterService) { }
 
   ngOnInit(): void {
     this.getUser();
-    this.getVideos();
+    this.getPosters();
   }
 
   getUser(): void {
@@ -24,20 +29,20 @@ export class OtherprofileComponent implements OnInit {
     this.userService.getUserById(id).subscribe(profile => this.profile = profile);
   }
 
-  getVideos(): void {
-    this.videoService.getAllVideosFromAuthor(this.route.snapshot.paramMap.get('id')).subscribe(
-      videos => videos.forEach(video => this.videos.push(video))
+  getPosters(): void {
+    this.posterService.getAllPostersFromSeller(this.route.snapshot.paramMap.get('id')).subscribe(
+      posters => posters.forEach(video => this.posters.push(video))
     );
   }
 
 
-  addFollow(): void{
-    if (!this.followClicked) {
-      this.userService.subscribeUser(this.profile).toPromise().then();
-
-    } else {
-      this.userService.unSubscribeUser(this.profile).toPromise().then()
-    }
-  }
+  // addFollow(): void{
+  //   if (!this.followClicked) {
+  //     this.userService.subscribeUser(this.profile).toPromise().then();
+  //
+  //   } else {
+  //     this.userService.unSubscribeUser(this.profile).toPromise().then()
+  //   }
+  // }
 
 }

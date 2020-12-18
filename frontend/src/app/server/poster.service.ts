@@ -51,6 +51,15 @@ export class PosterService {
     );
   }
 
+
+  //TODO
+  getAllPostersFromSeller(id: string): Observable<Poster[]> {
+    const url = `${this.userResourceURL}/${id}`;
+    return this.http.get<Poster[]>(url).pipe(
+      catchError(this.handleError<Poster[]>(`getPoster category = ${id}`))
+    );
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -66,4 +75,5 @@ export class PosterService {
       return of(result as T);
     };
   }
+
 }

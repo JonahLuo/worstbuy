@@ -50,7 +50,7 @@ public class UserDAPImpl implements UserDAO{
 
     @Override
     public List<User> list() {
-        List<User> list = sessionFactory.getCurrentSession().createQuery("from user").list();
+        List<User> list = sessionFactory.getCurrentSession().createQuery("from User").list();
         return list;
     }
 
@@ -60,5 +60,12 @@ public class UserDAPImpl implements UserDAO{
         User user = session.byId(User.class).load(id);
         session.delete(user);
 
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        String hql = "from User u where u.email = :email";
+        User user = (User) sessionFactory.getCurrentSession().createQuery(hql).setParameter("email", email).uniqueResult();
+        return user;
     }
 }

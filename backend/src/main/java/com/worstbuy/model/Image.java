@@ -3,13 +3,14 @@ package com.worstbuy.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="image")
+@Table(name="Image")
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String type;
+
+    private String name;
 
     @Column(name="picByte", length = 1000)
     private byte[] picByte;

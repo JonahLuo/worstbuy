@@ -24,17 +24,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(httpInterceptor());
-        registry.addInterceptor(headerTokenInterceptor());
+//        registry.addInterceptor(headerTokenInterceptor());
     }
 
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/api/**")
-//                .allowedOrigins("http://domain2.com")
-//                .allowedMethods("PUT", "DELETE")
-//                .allowedHeaders("header1", "header2", "header3")
-//                .exposedHeaders("header1", "header2")
-//                .allowCredentials(false).maxAge(3600);
-//    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
 
 }

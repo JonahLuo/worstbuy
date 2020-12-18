@@ -19,10 +19,10 @@ public class Transaction {
 //    @JoinColumn(name = "poster_id")
 //    private Poster poster;
 
-    @ManyToOne
-    private User buyer;
+    private Long buyer;
 
     @ManyToOne
+    @JoinColumn(name = "seller_id", insertable = false, updatable = false)
     private User seller;
 
     private String status;
@@ -35,11 +35,11 @@ public class Transaction {
 //        this.poster = poster;
 //    }
 
-    public User getBuyer() {
+    public Long getBuyer() {
         return buyer;
     }
 
-    public void setBuyer(User buyer) {
+    public void setBuyer(Long buyer) {
         this.buyer = buyer;
     }
 

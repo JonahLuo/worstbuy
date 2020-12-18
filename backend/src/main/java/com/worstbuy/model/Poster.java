@@ -22,11 +22,13 @@ public class Poster {
     private Date createDate;
     private boolean isClose;
 
-    @OneToOne
-    private Image image;
-//    @(fetch = FetchType.LAZY)
-//    @JoinColumn(name="user_id")
-//    private User seller;
+    private boolean hasImage;
+
+    @ManyToOne
+    @JoinTable(name = "user_poster",
+    joinColumns = {@JoinColumn(name="user_id")},
+    inverseJoinColumns = {@JoinColumn(name = "poster_id")})
+    private User seller;
 
     public Long getId() {
         return id;
@@ -36,13 +38,14 @@ public class Poster {
         this.id = id;
     }
 
-    public Image getImage() {
-        return image;
+    public boolean isHasImage() {
+        return hasImage;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setHasImage(boolean hasImage) {
+        this.hasImage = hasImage;
     }
+
     //    public User getSeller() {
 //        return seller;
 //    }
