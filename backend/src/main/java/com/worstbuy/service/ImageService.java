@@ -2,10 +2,14 @@ package com.worstbuy.service;
 
 import com.worstbuy.model.Image;
 
+import java.util.Optional;
+
 public interface ImageService {
-    Image findById(long id);
+    void save(Image img);
 
-    Image findByName(String name);
+    Optional<Image> findByName(String imageName);
 
-    Long save(Image image);
+    byte[] compressBytes(byte[] bytes);
+
+    byte[] decompressBytes(byte[] picByte);
 }

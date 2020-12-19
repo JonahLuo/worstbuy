@@ -24,27 +24,42 @@ public class UserController {
         return ResponseEntity.ok().body(list);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/user")
     public ResponseEntity<?> save(@RequestBody User user){
         long id = userService.save(user);
         return ResponseEntity.ok().body("User created with id: " + id);
     }
 
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> get(@PathVariable("id") long id){
-        User user = userService.get(id);
+    public ResponseEntity<User> get(@PathVariable("id") String id){
+        User user = userService.get(Long.parseLong(id));
         return ResponseEntity.ok().body(user);
     }
 
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/user/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody User user){
-        userService.update(id,user);
+    public ResponseEntity<?> update(@PathVariable("id") String id, @RequestBody User user){
+        userService.update(Long.parseLong(id),user);
         return ResponseEntity.ok().body("User Updated with id: " + id);
     }
 
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") long id){
-        userService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable("id") String id){
+        userService.delete(Long.parseLong(id));
         return ResponseEntity.ok().body("User deleted with id: " + id);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/users")
+    public ResponseEntity<User> getUserByEmail(@RequestParam("email") String email){
+        User user = userService.findUserByEmail(email);
+        return ResponseEntity.ok().body(user);
     }
 }

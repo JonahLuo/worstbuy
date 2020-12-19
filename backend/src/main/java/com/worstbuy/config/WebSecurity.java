@@ -37,7 +37,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
     }
     @Bean
     public PasswordEncoder passwordEncoder(){

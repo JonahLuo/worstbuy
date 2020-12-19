@@ -4,17 +4,17 @@ package com.worstbuy.model;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "Poster")
+@Entity(name = "Poster")
 public class Poster {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String title;
+    private String subTitle;
     private double price;
     private String description;
-    private String condition;
+    private String itemCondition;
     private String category;
     private String tag;
     private String brand;
@@ -26,8 +26,8 @@ public class Poster {
 
     @ManyToOne
     @JoinTable(name = "user_poster",
-    joinColumns = {@JoinColumn(name="user_id")},
-    inverseJoinColumns = {@JoinColumn(name = "poster_id")})
+    joinColumns = {@JoinColumn(name="poster_id")},
+    inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private User seller;
 
     public Long getId() {
@@ -46,13 +46,45 @@ public class Poster {
         this.hasImage = hasImage;
     }
 
-    //    public User getSeller() {
-//        return seller;
-//    }
-//
-//    public void setSeller(User seller) {
-//        this.seller = seller;
-//    }
+        public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public Date getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
     public double getPrice() {
         return price;
@@ -70,12 +102,12 @@ public class Poster {
         this.description = description;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getItemCondition() {
+        return itemCondition;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setItemCondition(String condition) {
+        this.itemCondition = condition;
     }
 
     public String getCategory() {
@@ -102,21 +134,21 @@ public class Poster {
         this.brand = brand;
     }
 
-    public Date getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+//    public Date getModifyDate() {
+//        return modifyDate;
+//    }
+//
+//    public void setModifyDate(Date modifyDate) {
+//        this.modifyDate = modifyDate;
+//    }
+//
+//    public Date getCreateDate() {
+//        return createDate;
+//    }
+//
+//    public void setCreateDate(Date createDate) {
+//        this.createDate = createDate;
+//    }
 
     public boolean isClose() {
         return isClose;
@@ -132,12 +164,10 @@ public class Poster {
                 "id=" + id +
                 ", price=" + price +
                 ", description='" + description + '\'' +
-                ", condition='" + condition + '\'' +
+                ", condition='" + itemCondition + '\'' +
                 ", category='" + category + '\'' +
                 ", tag='" + tag + '\'' +
                 ", brand='" + brand + '\'' +
-                ", modifyDate=" + modifyDate +
-                ", createDate=" + createDate +
                 ", isClose=" + isClose +
                 '}';
     }

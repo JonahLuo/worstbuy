@@ -51,4 +51,6 @@ public interface UserService {
      * @return          target user
      */
     User findUserByEmail(String email);
+
+    boolean checkBeforeSignup(User user);
 }

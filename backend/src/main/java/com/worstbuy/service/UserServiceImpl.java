@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public User getByName(String username) {
         return userDAO.getByName(username);
     }
@@ -57,6 +58,12 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public User findUserByEmail(String email) {
         return userDAO.findUserByEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public boolean checkBeforeSignup(User user) {
+        return userDAO.checkBeforeSignup(user);
     }
 
 

@@ -15,6 +15,7 @@ public class HttpInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified, Authorization");
 
         response.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS");
+
         return true;
     }
     @Override

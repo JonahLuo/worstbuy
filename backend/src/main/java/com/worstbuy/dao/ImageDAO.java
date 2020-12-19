@@ -1,11 +1,12 @@
 package com.worstbuy.dao;
 
 import com.worstbuy.model.Image;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ImageDAO {
-    Image findById(long id);
+import java.util.Optional;
 
-    Image findByName(String name);
-
-    Long save(Image image);
+@Repository
+public interface ImageDAO  extends JpaRepository<Image, Long> {
+    Optional<Image> findByName(String name);
 }

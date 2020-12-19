@@ -28,6 +28,7 @@ public class PosterDAOImpl implements PosterDAO{
     public long save(Poster poster) {
         sessionFactory.getCurrentSession().save(poster);
         return poster.getId();
+
     }
 
     @Override
@@ -43,7 +44,7 @@ public class PosterDAOImpl implements PosterDAO{
         oldPoster.setBrand(poster.getBrand());
         oldPoster.setCategory(poster.getCategory());
         oldPoster.setClose(poster.isClose());
-        oldPoster.setCondition(poster.getCondition());
+        oldPoster.setItemCondition(poster.getItemCondition());
         oldPoster.setDescription(poster.getDescription());
         oldPoster.setPrice(poster.getPrice());
         oldPoster.setTag(poster.getTag());
@@ -56,5 +57,13 @@ public class PosterDAOImpl implements PosterDAO{
         Poster poster = session.byId(Poster.class).load(id);
         session.delete(poster);
 
+    }
+
+    @Override
+    public List<Poster> getAllByCategory(String category) {
+        String hql = "from Poster p where p.category = :category and p.isClose = false";
+        List<Poster> list = sessionFactory.getCurrentSession().createQuery(hql).
+                setParameter("category", category).list();
+        return list;
     }
 }

@@ -53,4 +53,7 @@ public interface UserDAO {
      * @return          the target user
      */
     User findUserByEmail(String email);
+
+    boolean checkBeforeSignup(User user);
+
 }

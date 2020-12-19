@@ -27,6 +27,7 @@ public class User {
 
 
     @OneToMany (mappedBy = "seller")
+    @JsonIgnore
     private List<Transaction> transactions;
 
     @OneToMany(mappedBy = "seller")

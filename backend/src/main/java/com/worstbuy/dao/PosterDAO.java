@@ -38,4 +38,6 @@ public interface PosterDAO {
      * @param id the id of the poster to be deleted
      */
     void delete(long id);
+
+    List<Poster> getAllByCategory(String category);
 }

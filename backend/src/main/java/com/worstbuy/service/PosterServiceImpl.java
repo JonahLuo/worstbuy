@@ -47,4 +47,10 @@ public class PosterServiceImpl implements PosterService{
     public void delete(long id) {
         posterDAO.delete(id);
     }
+
+    @Override
+    @Transactional
+    public List<Poster> getAllByCategory(String category) {
+        return posterDAO.getAllByCategory(category);
+    }
 }

@@ -45,7 +45,7 @@ public class UserDAPImpl implements UserDAO{
     @Override
     public User getByName(String username) {
         String hql = "from User u where u.userName = :userName";
-        return (User)sessionFactory.getCurrentSession().createQuery(hql).setParameter("userName", username);
+        return (User)sessionFactory.getCurrentSession().createQuery(hql).setParameter("userName", username).uniqueResult();
     }
 
     @Override
@@ -67,5 +67,12 @@ public class UserDAPImpl implements UserDAO{
         String hql = "from User u where u.email = :email";
         User user = (User) sessionFactory.getCurrentSession().createQuery(hql).setParameter("email", email).uniqueResult();
         return user;
+    }
+
+    @Override
+    public boolean checkBeforeSignup(User user){
+        if(this.findUserByEmail(user.getEmail()) != null)
+            return false;
+        return true;
     }
 }
