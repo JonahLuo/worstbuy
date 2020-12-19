@@ -11,8 +11,8 @@ import {Poster} from '../models/Poster';
 })
 export class PosterService {
 
-  userResource: string;
-  userResourceURL: string;
+  posterResource: string;
+  posterResourceURL: string;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -24,8 +24,8 @@ export class PosterService {
    * constructor
    */
   constructor(private http: HttpClient) {
-    this.userResource = 'poster';
-    this.userResourceURL = `${environment.serverBaseURL}/${this.userResource}`;
+    this.posterResource = 'poster';
+    this.posterResourceURL = `${environment.serverBaseURL}/${this.posterResource}`;
   }
 
   /**
@@ -33,7 +33,7 @@ export class PosterService {
    * @param id the target poster id
    */
   getPosterById(id: string): Observable<Poster> {
-    const url = `${this.userResourceURL}/${id}`;
+    const url = `${this.posterResourceURL}/${id}`;
     return this.http.get<Poster>(url).pipe(
       catchError(this.handleError<Poster>(`getUser id=${id}`))
     );
@@ -45,20 +45,12 @@ export class PosterService {
    * @param category the target poster's category
    */
   getPostersByCategory(category: string): Observable<Poster[]> {
-    const url = `${this.userResourceURL}/${category}`;
+    const url = `${this.posterResourceURL}s?category=${category}`;
     return this.http.get<Poster[]>(url).pipe(
       catchError(this.handleError<Poster[]>(`getPoster category = ${category}`))
     );
   }
 
-
-  //TODO
-  getAllPostersFromSeller(id: string): Observable<Poster[]> {
-    const url = `${this.userResourceURL}/${id}`;
-    return this.http.get<Poster[]>(url).pipe(
-      catchError(this.handleError<Poster[]>(`getPoster category = ${id}`))
-    );
-  }
 
   /**
    * Handle Http operation that failed.
@@ -76,4 +68,18 @@ export class PosterService {
     };
   }
 
+
+  uploadPoster(poster: Poster): Observable<any> {
+    const url = `${this.posterResourceURL}`;
+    return this.http.post<any>(url, poster, this.cors).pipe(
+      catchError(this.handleError<any>('upload poster'))
+    );
+  }
+
+  deleteposter(poster: Poster): Observable<any>{
+    const url = `${this.posterResourceURL}\${poster.id}`;
+    return this.http.delete<any>(url, this.cors).pipe(
+      catchError(this.handleError<any>('upload poster'))
+    );
+  }
 }

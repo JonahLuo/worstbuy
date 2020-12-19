@@ -1,7 +1,7 @@
 <nb-card *ngIf="itemlist != null">
   <nb-card *ngFor="let item of itemlist" class="div-container">
     <nb-card-header routerLink="/pages/profile/{{item.seller.id}}" >
-      <nb-user [name]="item.seller.username" [picture]="item.seller.profileImage"></nb-user>
+      <nb-user [name]="item.seller.username" ></nb-user>
       {{item.title}}
     </nb-card-header>
     <div class = "video-info">

@@ -10,7 +10,7 @@ import {
   NbContextMenuModule,
   NbFormFieldModule, NbIconModule,
   NbInputModule,
-  NbLayoutModule, NbSelectModule, NbStepperModule,
+  NbLayoutModule, NbSelectModule, NbStepperModule, NbTabsetModule,
   NbUserModule
 } from '@nebular/theme';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
@@ -18,7 +18,7 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { CreatePosterComponent } from './create-poster/create-poster.component';
 import { ProfileComponent } from './profile/profile.component';
 import { OtherprofileComponent } from './otherprofile/otherprofile.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -48,6 +48,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     NbStepperModule,
     ReactiveFormsModule,
     NbSelectModule,
+    FormsModule,
+    NbTabsetModule,
   ],
   exports: [
     SafePipe

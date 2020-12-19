@@ -30,9 +30,7 @@ export class OtherprofileComponent implements OnInit {
   }
 
   getPosters(): void {
-    this.posterService.getAllPostersFromSeller(this.route.snapshot.paramMap.get('id')).subscribe(
-      posters => posters.forEach(video => this.posters.push(video))
-    );
+    this.posters = this.profile.posters;
   }
 
 

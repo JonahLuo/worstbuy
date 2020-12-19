@@ -10,18 +10,27 @@ import {Poster} from '../../models/Poster';
 })
 export class CategoryDetailComponent implements OnInit {
 
-  itemlist: Poster[] = []
+  itemlist: Poster[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private posterService: PosterService) { }
+              private posterService: PosterService) {
+    this.getItemList(this.route.snapshot.paramMap.get('category'));
+  }
 
   ngOnInit(): void {
-    this.getItemList(this.route.snapshot.paramMap.get('category'));
+
   }
 
   getItemList(category: string): void {
     this.posterService.getPostersByCategory(category).subscribe(
-      posters => this.itemlist = posters);
+      posters => posters.forEach(
+        poster => {
+          if (poster !== undefined && poster !== null) {
+            this.itemlist.push(poster);
+          }
+        }
+      )
+    );
   }
 }

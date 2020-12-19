@@ -1,9 +1,9 @@
 
-<!--<nb-card size="giant">-->
-<!--  <nb-card-header>-->
-<!--    <div class = "user">-->
-<!--      <nb-user [name]="profile?.username" [picture]="profile?.profileImage"></nb-user>-->
-<!--    </div>-->
+<nb-card size="giant">
+  <nb-card-header>
+    <div class = "user">
+      <nb-user [name]="profile?.username"></nb-user>
+    </div>
 <!--    <div class = "follow-btn">-->
 <!--      <button nbButton status="danger"-->
 <!--              class="follow-btn"-->
@@ -17,12 +17,12 @@
 <!--      </button>-->
 <!--    </div>-->
 
-<!--  </nb-card-header>-->
-<!--  <nb-card-body class="container">-->
-<!--    <nb-card *ngFor="let video of videos">-->
-<!--      <nb-card-header>{{video.title}}</nb-card-header>-->
-<!--      <a routerLink="/pages/details/{{video.id}}">-->
-<!--        <nb-card-body>-->
+  </nb-card-header>
+  <nb-card-body class="container">
+    <nb-card *ngFor="let poster of posters">
+      <nb-card-header>{{poster.title}}</nb-card-header>
+      <a routerLink="/pages/details/{{poster.id}}">
+        <nb-card-body>
 <!--          <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'">-->
 <!--          <div class="video-like">-->
 <!--            <div class="like">-->
@@ -39,11 +39,11 @@
 <!--              comments: {{video.comments.length}}-->
 <!--            </div>-->
 <!--          </div>-->
-<!--        </nb-card-body>-->
-<!--      </a>-->
-<!--      <nb-card-footer>-->
-<!--        {{video.description}}-->
-<!--      </nb-card-footer>-->
-<!--    </nb-card>-->
-<!--  </nb-card-body>-->
-<!--</nb-card>-->
+        </nb-card-body>
+      </a>
+      <nb-card-footer>
+        {{poster.description}}
+      </nb-card-footer>
+    </nb-card>
+  </nb-card-body>
+</nb-card>

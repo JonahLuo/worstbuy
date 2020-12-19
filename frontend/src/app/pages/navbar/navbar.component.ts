@@ -36,14 +36,15 @@ export class NavbarComponent implements OnInit {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
+        console.log(token.getPayload());
         if (token.isValid()) {
-          this.userid = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+          this.userid = token.getPayload().sub; // here we receive a payload from the token and assigns it to our `user` variable
         }
 
       });
 
     // console.log(this.userid);
-    userService.getUserById(this.userid).subscribe(profile => this.profile = profile);
+    userService.getUserByEmail(this.userid).subscribe(profile => this.profile = profile);
     // console.log(this.profile);
   }
 

@@ -26,9 +26,11 @@ export class CreatePosterComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  comments: Comment[];
   categories = Categories;
-  private fileToUpload: File = null;
+  selectedFile: File;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
   constructor(private posterService: PosterService,
               private authService: NbAuthService,
               private userService: UserService,
@@ -48,59 +50,49 @@ export class CreatePosterComponent implements OnInit {
 
   ngOnInit(): void {
     this.firstFormGroup = this.formBuilder.group({
-      url: ['', Validators.required]
+      title: ['', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
-      title: ['', Validators.required],
+      subtitle: ['', Validators.required],
       tag: ['', Validators.required],
-      description: ['']
+      description: [''],
+      category: ['']
     });
   }
 
-  //TODO
-  // step1next() {
-  //   if (this.getPosterImage(this.firstFormGroup.value.url)) {
-  //     this.poster.seller = this.profile;
-  //     this.poster.comments = this.comments;
-  //     this.uploadFileToActivity();
-  //     // this.nbStepperComponent.next();
-  //   }
-  // }
 
-  //TODO
-  // step2next() {
-  //   this.poster.title = this.secondFormGroup.value.title;
-  //   this.poster.tag = this.secondFormGroup.value.tag;
-  //   this.poster.description = (this.secondFormGroup.value.description === undefined ? 'none' : this.secondFormGroup.value.description);
-  //   this.poster.comments = new Array();
-  //   this.posterService.uploadPoster(this.poster).subscribe();
-  // }
+  step1next(): void{
+    this.poster.seller = this.profile;
+    this.poster.title = this.firstFormGroup.value.title;
+    // this.poster.comments = this.comments;
+    // this.upload();
+  }
 
-  //TODO
-  // getPosterImage(url: string): boolean {
-  //   if (url !== undefined ) {
-  //     const temp = url.replace('https://www.youtube.com/watch?v=', '');
-  //     if (temp === null) { return false; }
-  //     this.poster.url = temp;
-  //     return true;
+  step2next(): void{
+    this.poster.title = this.secondFormGroup.value.subtitle;
+    this.poster.tag = this.secondFormGroup.value.tag;
+    this.poster.category = this.secondFormGroup.value.category;
+    this.poster.description = (this.secondFormGroup.value.description === undefined ? 'none' : this.secondFormGroup.value.description);
+    this.posterService.uploadPoster(this.poster).subscribe();
+  }
+
+  // getPosterImage(url: string): void {
+  //   this.fileService.getFile(this.poster.id).subscribe(
+  //     res = >{
+  //       this.this.retrieveResonse = res;
+  //       this.this.base64Data = this.retrieveResonse.picByte;
+  //       this.this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
   //   }
-  //   return false;
+  //   );
   // }
 
   // tslint:disable-next-line:typedef
-  upload(files: FileList) {
-    this.fileToUpload = files.item(0);
+  upload() {
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    this.fileService.postFile(uploadImageData).subscribe();
   }
-
-  uploadFileToActivity(): boolean {
-    let message = false;
-    this.fileService.postFile(this.fileToUpload).subscribe(
-      data => {
-        message = true;
-      }, error => {
-        console.log(error);
-      }
-    );
-    return message;
+  onFileChanged(event): void{
+    this.selectedFile = event.target.files[0];
   }
 }

@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
     'User Info',
     'My poster',
     'Liked',
-    'Subscription',
+    'Transaction',
   ];
   tabKey = 'My poster';
   tabKeyL = 'Liked';
@@ -67,11 +67,11 @@ export class ProfileComponent implements OnInit {
       .subscribe((token: NbAuthJWTToken) => {
 
         if (token.isValid()) {
-          this.requestId = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+          this.requestId = token.getPayload().sub; // here we receive a payload from the token and assigns it to our `user` variable
           console.log(this.requestId);
         }
       });
-    this.userService.getUserById(this.requestId).subscribe(
+    this.userService.getUserByEmail(this.requestId).subscribe(
       profile => this.user = profile
     );
   }
@@ -79,51 +79,49 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.getDataReady();
+    this.getDataReady();
   }
 
-  // getDataReady(): void {
-  //   // get all posters made by user
-  //   this.userService.getUserById(this.requestId).subscribe(
-  //     profile => profile.posters.forEach(
-  //       posterid => this.posterService.getposterById(posterid).subscribe(
-  //         poster => {
-  //           if(poster !== null && poster !== undefined) {this.posters.push(poster); }
-  //         }
-  //       )
-  //     )
-  //   );
-  //
-  //   // get all posters liked by user
-  //   this.userService.getUserById(this.requestId).subscribe(
-  //     profile => profile.liked.forEach(
-  //       posterid => this.posterService.getposterById(posterid).subscribe(
-  //         poster => {
-  //           if (poster !== null && poster !== undefined) {this.likes.push(poster); }
-  //         }
-  //       )
-  //     )
-  //   );
-  //
-  //   // get all users followed by user
-  //   this.userService.getUserById(this.requestId).subscribe(
-  //     profile => profile.subscribe.forEach(
-  //       userid => this.userService.getUserById(userid).subscribe(
-  //         user => user.posters.forEach(
-  //           posterid => this.posterService.getposterById(posterid).subscribe(
-  //             poster => {
-  //               if (poster !== undefined && poster !== null) {
-  //                 this.sub.push(poster);
-  //                 this.posterAuthors.set(poster.id, user);
-  //               }
-  //             }
-  //           )
-  //         )
-  //       )
-  //     )
-  //   );
-  //
-  // }
+  getDataReady(): void {
+    // get all posters made by user
+    this.userService.getUserByEmail(this.requestId).subscribe(
+      profile => profile.posters.forEach(
+          poster => {
+            if(poster !== null && poster !== undefined) {this.posters.push(poster); }
+          }
+      )
+    );
+
+    // get all posters liked by user
+    // this.userService.getUserById(this.requestId).subscribe(
+    //   profile => profile.liked.forEach(
+    //     posterid => this.posterService.getposterById(posterid).subscribe(
+    //       poster => {
+    //         if (poster !== null && poster !== undefined) {this.likes.push(poster); }
+    //       }
+    //     )
+    //   )
+    // );
+
+    // // get all users followed by user
+    // this.userService.getUserById(this.requestId).subscribe(
+    //   profile => profile.subscribe.forEach(
+    //     userid => this.userService.getUserById(userid).subscribe(
+    //       user => user.posters.forEach(
+    //         posterid => this.posterService.getposterById(posterid).subscribe(
+    //           poster => {
+    //             if (poster !== undefined && poster !== null) {
+    //               this.sub.push(poster);
+    //               this.posterAuthors.set(poster.id, user);
+    //             }
+    //           }
+    //         )
+    //       )
+    //     )
+    //   )
+    // );
+
+  }
 
 
 
@@ -159,16 +157,16 @@ export class ProfileComponent implements OnInit {
     alert('Save SUCCESSFULLY');
   }
 
-  // deleteItem(): void{
-  //
-  //   this.Arr.forEach((item) => (item.edit = true));
-  //   //  var deleteitem = confirm('Delete?')
-  //   //  if(deleteitem){
-  //   this.posterService.deleteposter(this.poster).subscribe();
-  //
-  //   //}
-  //   //window.location.assign('');
-  // }
+  deleteItem(): void{
+
+    this.Arr.forEach((item) => (item.edit = true));
+    //  var deleteitem = confirm('Delete?')
+    //  if(deleteitem){
+    this.posterService.deleteposter(this.poster).subscribe();
+
+    //}
+    //window.location.assign('');
+  }
 
   del(event, index): void{
     event.stopPropagation();

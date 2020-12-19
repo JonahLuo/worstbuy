@@ -38,6 +38,13 @@ export class UserService {
     );
   }
 
+  getUserByEmail(email: string): Observable<User>{
+    const url = `${this.userResourceURL}?email=${email}`;
+    return this.http.get<User>(url).pipe(
+      catchError(this.handleError<User>(`getUser email=${email}`))
+    );
+  }
+
   /**
    * Put: update user information
    */
@@ -128,6 +135,8 @@ export class UserService {
     );
   }
 
+
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -145,4 +154,5 @@ export class UserService {
       return of(result as T);
     };
   }
+
 }

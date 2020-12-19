@@ -1,57 +1,61 @@
-<!--<nb-card size = giant>-->
-<!--  <nb-card-header>Upload Video</nb-card-header>-->
-<!--  <nb-card-body>-->
-<!--    <nb-stepper orientation="horizontal" [disableStepNavigation]="true">-->
-<!--      <nb-step label="Input URL" [stepControl]="firstFormGroup">-->
-<!--        &lt;!&ndash;        input video url&ndash;&gt;-->
-<!--        <form [formGroup]="firstFormGroup">-->
-<!--&lt;!&ndash;          TODO: upload the image of the item&ndash;&gt;-->
-<!--          <label>Input your youtube URL:</label>-->
-<!--          <div class="InputDiv">-->
-<!--            <input  nbInput [fullWidth]="true" type="file"-->
-<!--                    (change)="upload($event.target.files)" formControlName="url" required>-->
-<!--          </div>-->
-<!--          <button nbButton (click)="step1next()" nbStepperNext>Next<nb-icon icon="arrow-right"></nb-icon> </button>-->
-<!--        </form>-->
-<!--      </nb-step>-->
-<!--      <nb-step label="Title & Description" [stepControl]="secondFormGroup">-->
-<!--        &lt;!&ndash;        input video title and description&ndash;&gt;-->
-<!--        <form [formGroup]="secondFormGroup">-->
-<!--          <div>-->
-<!--            <label> Title </label>-->
-<!--            <div class="InputDiv">-->
-<!--              <input nbInput placeholder="video title" formControlName="title" required>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <label> Tag </label>-->
-<!--            <div class="InputDiv">-->
-<!--              <nb-select formControlName="categories">-->
-<!--                <nb-option *ngFor="let category of categories" [value]="category">{{category}}</nb-option>-->
-<!--              </nb-select>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <label> Description </label>-->
-<!--            <div class="InputDiv">-->
-<!--              <textarea nbInput [fullWidth]="true" placeholder="say something cool about your video" formControlName="description" required></textarea>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <button nbButton nbStepperPrevious><nb-icon icon="arrow-left"></nb-icon>Back</button>-->
-<!--          <button class="step2button" nbButton (click)="step2next()" nbStepperNext>Next<nb-icon icon="arrow-right"></nb-icon> </button>-->
-<!--        </form>-->
-<!--      </nb-step>-->
-<!--      <nb-step label="All Done!">-->
-<!--        &lt;!&ndash;        add categoriess for video&ndash;&gt;-->
-<!--        <div class="allDone">-->
-<!--          All Done!-->
-<!--        </div>-->
-<!--        <div class="allDone">-->
-<!--          <nb-icon icon="checkmark-circle-2"-->
-<!--                   [options]="{ animation: { type: 'zoom' }, fill: 'green', width: 48, height: 48 }"></nb-icon>-->
-<!--        </div>-->
+<nb-card size = giant>
+  <nb-card-header>Post An Item!</nb-card-header>
+  <nb-card-body>
+    <nb-stepper orientation="horizontal" [disableStepNavigation]="true">
+      <nb-step label="Upload Image" [stepControl]="firstFormGroup">
+        <!--        input video url-->
+        <form [formGroup]="firstFormGroup">
+<!--          TODO: upload the image of the item-->
+          <label>upload the item image:</label>
+          <div class="InputDiv">
+            <input  nbInput [fullWidth]="true" type="file"
+                    (change)="onFileChanged($event)"  required>
+          </div>
+          <label>Input your poster name: </label>
+          <div class="InputDiv">
+            <input nbInput [fullWidth]="true" type="text" formControlName="title" required="">
+          </div>
+          <button nbButton (click)="step1next()" nbStepperNext>Next<nb-icon icon="arrow-right"></nb-icon> </button>
+        </form>
+      </nb-step>
+      <nb-step label="Title & Description" [stepControl]="secondFormGroup">
+        <!--        input video title and description-->
+        <form [formGroup]="secondFormGroup">
+          <div>
+            <label> Title </label>
+            <div class="InputDiv">
+              <input nbInput placeholder="video title" formControlName="subtitle" required>
+            </div>
+          </div>
+          <div>
+            <label> Tag </label>
+            <div class="InputDiv">
+              <nb-select formControlName="category">
+                <nb-option *ngFor="let category of categories" [value]="category">{{category}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div>
+            <label> Description </label>
+            <div class="InputDiv">
+              <textarea nbInput [fullWidth]="true" placeholder="say something cool about your video" formControlName="description" required></textarea>
+            </div>
+          </div>
+          <button nbButton nbStepperPrevious><nb-icon icon="arrow-left"></nb-icon>Back</button>
+          <button class="step2button" nbButton (click)="step2next()" nbStepperNext>Next<nb-icon icon="arrow-right"></nb-icon> </button>
+        </form>
+      </nb-step>
+      <nb-step label="All Done!">
+        <!--        add categoriess for video-->
+        <div class="allDone">
+          All Done!
+        </div>
+        <div class="allDone">
+          <nb-icon icon="checkmark-circle-2"
+                   [options]="{ animation: { type: 'zoom' }, fill: 'green', width: 48, height: 48 }"></nb-icon>
+        </div>
 
-<!--      </nb-step>-->
-<!--    </nb-stepper>-->
-<!--  </nb-card-body>-->
-<!--</nb-card>-->
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

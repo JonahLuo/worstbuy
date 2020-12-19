@@ -2,9 +2,9 @@ export const Categories: string[] = [
   'Electronics',
   'Computers',
   'Toys',
-  'Game Console',
-  'Video Game',
+  'Game_Console',
+  'Video_Game',
   'Sports',
-  'Smart Home',
-  'Out Doors'
+  'Smart_Home',
+  'Out_Doors'
 ];

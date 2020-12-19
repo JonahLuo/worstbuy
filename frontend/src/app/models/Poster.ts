@@ -4,7 +4,17 @@ export class Poster{
   id: string;
   seller: User;
   title: string;
-  image: string;
+  subTitle: string;
+  price: any;
+  category: string;
+  tag: string;
+  brand: string;
+  modifyDate: Date;
+  createDate: Date;
+  isClose = false;
+  hasImage = false;
+  description: string;
+
 
   constructor() {
   }

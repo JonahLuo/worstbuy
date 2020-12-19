@@ -1,3 +1,5 @@
+import {Poster} from './Poster';
+
 export interface User {
   id: string;
   username: string;
@@ -5,5 +7,8 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  profileImage: string;
+  rate: any;
+  hasImage: boolean;
+  address: string;
+  posters: Poster[];
 }

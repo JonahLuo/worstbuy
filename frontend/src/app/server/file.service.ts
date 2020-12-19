@@ -31,10 +31,8 @@ export class FileService {
    * Post: upload file to backend
    * @param file file to be uploaded
    */
-  postFile(file: File): Observable<boolean> {
+  postFile(file: FormData): Observable<boolean> {
     const url = `${this.fileResourceURL}/uploadImg`;
-    const formData: FormData = new FormData();
-    formData.append('fileKey', file, file.name);
     return this.http.post(url, file, this.cors).pipe(
       catchError(this.handleError<any>(`upload Profile Image`))
     );
@@ -44,10 +42,10 @@ export class FileService {
    * Get: get file by id
    * @param id the id of the target image
    */
-  getFile(id: string): Observable<File>{
+  getFile(id: string): Observable<any>{
     const url = `${this.fileResourceURL}/${id}`;
-    return this.http.get<File>(url).pipe(
-      catchError(this.handleError<File>(`getFile id=${id}`))
+    return this.http.get<any>(url).pipe(
+      catchError(this.handleError<any>(`getFile id=${id}`))
     );
   }
 
